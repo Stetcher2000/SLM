@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1,user-scalable=no" />
   <title>Secrets Locked</title>
-  <!-- Source Code Pro from Google Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Code+Pro:400,700&display=swap">
   <style>
     html, body {
@@ -15,10 +14,9 @@
       background: #000;
     }
     body, input, button {
-      font-family: 'Source Code Pro', monospace;
+      font-family: 'Source Code Pro', monospace !important;
       color: #fff;
     }
-    /* Matrix digital rain background */
     #matrix-canvas {
       position: fixed;
       left: 0; top: 0;
@@ -28,16 +26,17 @@
       background: #000;
     }
     .main-content {
-      position: relative;
-      z-index: 5;
+      position: absolute;
+      top: 0; left: 0;
       width: 100vw; height: 100vh;
+      z-index: 5;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
     }
-    /* Headers */
     .header {
-      margin-top: 1.5rem;
+      margin: 0;
       font-size: 3.5rem;
       color: #ff0033;
       text-align: center;
@@ -70,16 +69,13 @@
       box-shadow: 0 0 11px #8000ff70, 0 0 7px #14001a;
       cursor: pointer;
       transition: background 0.25s, color 0.25s;
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -10%);
-      z-index: 10;
+      position: relative;
       outline: none;
     }
     .hacker-btn:active {
       background: #510025;
       color: #fff;
     }
-
-    /* Small IP window */
     .ip-box {
       position: fixed;
       left: 0.4vw; bottom: 0.8vh;
@@ -97,8 +93,6 @@
       text-align: left;
       box-shadow: 0 0 5px #21ff65;
     }
-
-    /* Popups & Overlays */
     .overlay {
       position: fixed;
       top: 0; left: 0;
@@ -110,7 +104,7 @@
       background: rgba(12,12,12,0.92);
       animation: fadeIn 0.26s;
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeIn {from {opacity:0} to {opacity:1}}
     .popup {
       background: #060009;
       border: 2.7px solid #7e1046;
@@ -124,8 +118,12 @@
       text-align: center;
       font-family: "Source Code Pro", monospace;
       user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-    .popup.red { color: #ff0033; }
+    .popup.red {color:#ff0033;}
     .popup .red-x {
       position: absolute; top: 0.95rem; right: 1.3rem;
       color: #ff073a;
@@ -137,7 +135,6 @@
       z-index: 20;
     }
     .popup .red-x:active { color: #a0002d; }
-
     .popup input, .popup textarea {
       width: 85%; margin: 0.9rem 0 0.6rem 0;
       background: #1a1a22;
@@ -148,6 +145,7 @@
       border-radius: 9px;
       font-family: "Source Code Pro", monospace;
       outline: none;
+      text-align: center;
     }
     .popup label {
       color: #39ff14;
@@ -170,15 +168,17 @@
       transition: background 0.13s;
     }
     .popup .btn-pop:active { background: #08002a; }
-
-    /* Loading bar */
     .load-bar-bg {
       background: #0d1b0d;
-      width: 95%; max-width: 345px; height: 20px;
+      width: 95%;
+      max-width: 345px;
+      height: 20px;
       border-radius: 8px;
       border: 2px solid #37a636;
       margin: 1.5rem auto 0.9rem auto;
       box-shadow: 0 0 20px #21ff65bb;
+      display: flex;
+      align-items: center;
     }
     .load-bar {
       height: 100%;
@@ -187,8 +187,6 @@
       box-shadow: 0 0 14px #00ff9c;
       transition: width 0.16s;
     }
-
-    /* Final access UI */
     .file-screen {
       position: absolute;
       top: 0; left: 0;
@@ -198,24 +196,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
     }
     .file-header {
       font-size: 2.6rem;
       color: #39ff14;
-      margin: 2.2rem auto 1.2rem auto;
+      margin: 0 auto 1.2rem auto;
       text-shadow: 0 0 18px #21ff65, 0 0 9px #151f0e;
     }
     .files-list {
       width: 88%;
       margin: 0 auto;
       max-width: 425px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
     }
     .file-row {
       background: #1b1c1c;
       color: #00e033;
       padding: 1.1rem 1.4rem;
-      margin: 0.36rem 0;
       border-radius: 9px;
       box-shadow: 0 0 8px #00ffb420;
       font-family: "Source Code Pro", monospace;
@@ -223,17 +225,17 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      width: 100%;
+      max-width: 300px;
     }
     .file-row::before {
       content: "📄";
-      display: inline-block;
       margin-right: 12px;
       font-size: 1.24rem;
     }
-    /* Banned lock */
     .ban-lock {
       position: fixed;
-      top: 53%; left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       font-size: 7.6rem;
       color: #ff0033;
@@ -243,13 +245,12 @@
       user-select: none;
     }
     @keyframes shake {
-      from { transform: translate(-50%, -50%) rotate(-3deg); }
-      to { transform: translate(-50%, -50%) rotate(3deg); }
+      from { transform: translate(-50%, -50%) rotate(-3deg);}
+      to {   transform: translate(-50%, -50%) rotate(3deg);}
     }
-    /* Recording icon */
     .recording-icon {
       position: fixed;
-      top: 1vh; left: 2vw;
+      top: 2vh; left: 2vw;
       font-size: 1.6rem;
       color: #ff0033;
       z-index: 2002;
@@ -264,15 +265,14 @@
       gap: 0.4em;
     }
     .recording-icon span { font-size: 0.77rem; color: #ff0033; letter-spacing: 1px; }
-    @keyframes pulse { 
-      from { box-shadow: 0 0 6px #ff123d, 0 0 1px #a2002d; }
-      to {   box-shadow: 0 0 28px #ff0033, 0 0 6px #a2002d; }
+    @keyframes pulse {
+      from { box-shadow: 0 0 6px #ff123d, 0 0 1px #a2002d;}
+      to { box-shadow: 0 0 28px #ff0033, 0 0 6px #a2002d;}
     }
-    /* Small screen optimizations */
     @media (max-width: 450px) {
       .header { font-size: 2.2rem; }
       .password { font-size: 3.1rem; }
-      .popup { font-size: 1rem; min-width: 92vw; }
+      .popup { font-size: 1rem; min-width: 92vw;}
     }
   </style>
 </head>
@@ -288,7 +288,7 @@
 <div class="ip-box" id="ipBox">IP: --.--.--.--</div>
 <div id="modal-root"></div>
 <script>
-  // Matrix Digital Rain (Canvas)[1][5]
+  // Matrix Digital Rain
   const canvas = document.getElementById('matrix-canvas');
   const ctx = canvas.getContext('2d');
   let w = 0, h = 0;
@@ -302,7 +302,6 @@
   }
   resizeMatrix();
   window.addEventListener('resize',resizeMatrix);
-
   function drawMatrix() {
     ctx.fillStyle = "rgba(0,0,0,0.14)";
     ctx.fillRect(0,0,w,h);
@@ -311,32 +310,27 @@
     for (let i = 0; i < columns.length; i++) {
       const text = chars[Math.floor(Math.random()*chars.length)];
       ctx.fillText(text, i*fontSize, columns[i]*fontSize);
-      if (columns[i]*fontSize > h && Math.random()>0.99)
-        columns[i] = 0;
+      if (columns[i]*fontSize > h && Math.random()>0.99) columns[i] = 0;
       columns[i]++;
     }
     requestAnimationFrame(drawMatrix);
   }
   drawMatrix();
 
-  // IP Address Fetch[1]
+  // Fetch IP address
   fetch("https://api.ipify.org?format=json")
     .then(r=>r.json()).then(obj=>{
       document.getElementById("ipBox").textContent = "IP: " + obj.ip;
     }).catch(()=>{});
 
-  // Utility
-  function $(id) { return document.getElementById(id); }
-  let state = { step: 0, tries: 0, nameTried: 0, banned: false, resume: false, correct: false, unlocked: false};
+  // Modal/popup logic
+  function $(q) { return document.getElementById(q)||document.querySelector(q);}
+  let state = { step: 0, tries: 0, nameTried: 0, banned: false, resume: false, correct: false, unlocked: false };
   let atNameStep = false;
 
   // Modal root for popups
   const modalRoot = $("modal-root");
-
-  // Helper to close all overlays
   function closeOverlay() { modalRoot.innerHTML = ""; }
-
-  // Show Loading Screen
   function showLoading() {
     modalRoot.innerHTML = `
     <div class="overlay">
@@ -355,8 +349,6 @@
     }
     tick();
   }
-
-  // Sequence Steps
   function askGoodPerson() {
     modalRoot.innerHTML = `
       <div class="overlay">
@@ -429,13 +421,10 @@
       setTimeout(()=>{location.reload();},3000);
     }
   }
-
-  // At this point you always resume from name step even if you go back home.
   function enterNameStep(){
     atNameStep = true; state.nameTried = 0; state.banned = false;
     showNamePopup();
   }
-
   function showNamePopup(){
     modalRoot.innerHTML = `
       <div class="overlay">
@@ -450,7 +439,6 @@
     `;
     $("firstName").focus();
   }
-
   function checkName(){
     const fname = ($("firstName")?.value||"").trim().toLowerCase();
     const lname = ($("lastName")?.value||"").trim().toLowerCase();
@@ -549,8 +537,6 @@
       </div>
     `;
   }
-
-  // Home Button
   $("roseBtn").onclick = function(){
     if(atNameStep){
       enterNameStep();
@@ -559,8 +545,6 @@
       setTimeout(()=>{closeOverlay(); askGoodPerson();},10020);
     }
   }
-  // Helper for single-element querySelector (shorthand)
-  function $(q){ return document.getElementById(q)||document.querySelector(q); }
 </script>
 </body>
 </html>
